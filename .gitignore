@@ -1,3 +1,4 @@
 .settings/
 ant/
 target/
+WebContent/WEB-INF/classes/
