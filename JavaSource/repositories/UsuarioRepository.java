@@ -94,5 +94,4 @@ public class UsuarioRepository implements DAORepository<Usuario> {
 
 		return usuarios; // Paso 3
 	}
-
 }
