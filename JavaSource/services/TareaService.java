@@ -1,10 +1,14 @@
 package services;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+
 import entities.Tarea;
 import entities.Usuario;
 import repositories.TareaRepository;
 
-public class TareaService {
+public class TareaService implements ITareaService {
 	
 	private final TareaRepository repo = new TareaRepository();
 	private final UsuarioService uService = UsuarioService.getInstance();
@@ -26,5 +30,21 @@ public class TareaService {
 			uService.update(u);
 		}
 		repo.save(t);
+	}
+	
+	public void update(Tarea t) {
+		repo.update(t);
+	}
+	
+	public void delete(Tarea t) {
+		repo.delete(t);
+	}
+	
+	public Optional<Tarea> getById(Long id) {
+		return repo.getById(id);
+	}
+	
+	public List<Tarea> getAll() {
+		return new LinkedList<>(repo.getAll());
 	}
 }

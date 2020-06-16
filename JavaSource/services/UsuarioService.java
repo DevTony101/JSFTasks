@@ -7,7 +7,7 @@ import java.util.Optional;
 import entities.Usuario;
 import repositories.UsuarioRepository;
 
-public class UsuarioService {
+public class UsuarioService implements IUsuarioService {
 	
 	private final UsuarioRepository repo = new UsuarioRepository();
 	private static final UsuarioService INSTANCE = new UsuarioService();
