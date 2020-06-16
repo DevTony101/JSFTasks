@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -53,5 +54,5 @@ public class Usuario implements Serializable {
 	private Date fechaCreacion;
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	private List<Tarea> tareas;
+	private List<Tarea> tareas = new LinkedList<>();
 }
