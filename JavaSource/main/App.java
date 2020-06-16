@@ -1,28 +1,26 @@
 package main;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
+import entities.Tarea;
 import entities.Usuario;
-import repositories.DAORepository;
+import services.TareaService;
+import services.UsuarioService;
 
 public class App {
-
-	public static void main(String[] args) {
-		Session session = DAORepository.FACTORY.openSession();
-		Transaction t = session.beginTransaction();
-
+	public static void main(String... args) {
+		UsuarioService uService = UsuarioService.getInstance();
+		TareaService tService = TareaService.getInstance();
+		
 		Usuario u = new Usuario();
-		u.setNombre("Tony");
-		u.setApellido("Manjarres");
-		u.setNombreUsuario("devtony");
-		u.setVerificado(true);
-		u.setStatus("Soltero");
-		u.setFechaCreacion(new java.util.Date());
-
-		session.save(u);
-		t.commit();
-		DAORepository.FACTORY.close();
-		session.close();
+		u.setNombre("Margarita");
+		u.setApellido("Robles");
+		u.setNombreUsuario("margarita_32");
+		u.setStatus("Soltera");
+		uService.save(u);
+		
+		Tarea t = new Tarea();
+		t.setTitulo("Construir aplicacion JSF");
+		t.setCompletada(false);
+		t.setFechaFinal(new java.util.Date());
+		tService.save(t, u);
 	}
 }
