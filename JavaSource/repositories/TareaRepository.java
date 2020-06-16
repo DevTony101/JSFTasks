@@ -23,7 +23,7 @@ public class TareaRepository implements DAORepository<Tarea> {
 		Transaction trans = session.beginTransaction();
 		try {
 			session.save(obj);
-			LOG.info("Usuario guardado satisfactoriamente");
+			LOG.info("Tarea guardada satisfactoriamente");
 		} catch (Exception e) {
 			LOG.error("Error: " + e.getMessage());
 		} finally {
@@ -38,7 +38,7 @@ public class TareaRepository implements DAORepository<Tarea> {
 		Transaction trans = session.beginTransaction();
 		try {
 			session.update(obj);
-			LOG.info("Usuario guardado satisfactoriamente");
+			LOG.info("Tarea guardada satisfactoriamente");
 		} catch (Exception e) {
 			LOG.error("Error: " + e.getMessage());
 		} finally {

@@ -38,7 +38,7 @@ public class UsuarioRepository implements DAORepository<Usuario> {
 		Transaction trans = session.beginTransaction();
 		try {
 			session.update(obj);
-			LOG.info("Usuario guardado satisfactoriamente");
+			LOG.info("Usuario actualizado satisfactoriamente");
 		} catch (Exception e) {
 			LOG.error("Error: " + e.getMessage());
 		} finally {
