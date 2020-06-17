@@ -1,14 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<h:head>
 <title>JSFTutorial</title>
-</head>
+</h:head>
 
-<body>
+<h:body>
 	<ul>
-		<li><a href="./usuarios.jsf">Usuarios</a></li>
-		<li><a href="./tareas.jsf">Tareas</a></li>
+		<li><h:link value="Usuarios" outcome="usuarios" /></li>
+		<li><h:link value="Tareas" outcome="tareas" /></li>
 	</ul>
-	<p>#{tareaController.mensaje}</p>
-</body>
+	
+	<h:outputLabel value="Ingresa un nueva Tarea: " />
+	<br />
+	<h:form>
+		Titulo: <h:inputText id="itTitulo" value="#{tareaController.tarea.titulo}" />
+		<br />
+		Descripcion: <h:inputTextarea id="itApellido" value="#{tareaController.tarea.descripcion}" />
+		<br />
+		Nombre del Usuario: <h:inputText id="itUsuario" value="#{tareaController.usuario}" />
+		<br />
+		<br />
+		<h:commandButton id="btnEnviar" value="Crear Tarea" action="#{tareaController.guardarTarea()}" />
+	</h:form>
+</h:body>
 </html>
