@@ -29,6 +29,8 @@ public class TareaService implements ITareaService {
 			u.getTareas().add(t);
 			uService.update(u);
 		}
+		t.setCompletada(false);
+		t.setFechaFinal(new java.util.Date());
 		repo.save(t);
 	}
 	
