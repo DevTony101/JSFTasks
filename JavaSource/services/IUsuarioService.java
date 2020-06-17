@@ -11,5 +11,6 @@ public interface IUsuarioService {
 	public void update(Usuario u);
 	public void delete(Usuario u);
 	public Optional<Usuario> getById(Long id);
+	public Usuario getByNombre(String nombre);
 	public List<Usuario> getAll();
 }

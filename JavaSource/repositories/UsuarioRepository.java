@@ -94,4 +94,16 @@ public class UsuarioRepository implements DAORepository<Usuario> {
 
 		return usuarios; // Paso 3
 	}
+	
+	public Usuario getUsuarioByNombre(String nombre) {
+		// Asumiendo que el nombre del usuario no se repita
+		@Cleanup
+		Session session = FACTORY.openSession();
+		Transaction trans = session.beginTransaction();
+		String jpql = "SELECT u FROM Usuario u WHERE u.nombre = :nombre";
+		Query<Usuario> query = session.createQuery(jpql, Usuario.class).setParameter("nombre", nombre);
+		Usuario usuario = query.getSingleResult();
+		trans.commit();
+		return usuario;
+	}
 }

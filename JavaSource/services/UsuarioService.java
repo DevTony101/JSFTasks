@@ -37,6 +37,10 @@ public class UsuarioService implements IUsuarioService {
 		repo.delete(obj);
 	}
 	
+	public Usuario getByNombre(String nombre) {
+		return repo.getUsuarioByNombre(nombre);
+	}
+	
 	public Optional<Usuario> getById(Long id) {
 		return repo.getById(id);
 	}
