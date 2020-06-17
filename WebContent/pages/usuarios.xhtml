@@ -1,14 +1,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>JSFTutorial</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>JSFTutorial</title>
+</h:head>
 
-<body>
+<h:body>
 	<ul>
-		<li><a href="./usuarios.jsf">Usuarios</a></li>
-		<li><a href="./tareas.jsf">Tareas</a></li>
+		<li><h:link value="Usuarios" outcome="usuarios" /></li>
+		<li><h:link value="Tareas" outcome="tareas" /></li>
 	</ul>
-	<p>#{usuarioController.mensaje}</p>
-</body>
+
+	<h:outputLabel value="Ingresa un nuevo Usuario: " />
+	<br />
+	<h:form>
+		Nombre: <h:inputText id="itNombre" value="#{usuarioController.usuario.nombre}" />
+		<br />
+		Apellido: <h:inputText id="itApellido" value="#{usuarioController.usuario.apellido}" />
+		<br />
+		Status: <h:inputText id="itStatus" value="#{usuarioController.usuario.status}" />
+		<br />
+		Nombre de Usuario: <h:inputText id="itUsername" value="#{usuarioController.usuario.nombreUsuario}" />
+		<br />
+		<br />
+		<h:commandButton id="btnEnviar" value="Crear Usuario" action="#{usuarioController.guardarUsuario()}" />
+	</h:form>
+	<br />
+	<br />
+	<h:outputLabel value="Usuarios Registrados:" />
+	<ui:repeat var="usuario" value="#{usuarioController.UService.all}" varStatus="status">
+		<hr />
+		<h:outputText value="Usuario numero #{status.index + 1}"></h:outputText>
+		<br />
+		Nombre: <h:outputText value="#{usuario.nombre}"></h:outputText>
+		<br />
+		Apellido: <h:outputText value="#{usuario.apellido}"></h:outputText>
+		<br />
+		Nombre de Usuario: <h:outputText value="#{usuario.nombreUsuario}"></h:outputText>
+		<br />
+		Fecha de Creación: <h:outputText value="#{usuario.fechaCreacion}"></h:outputText>
+		<hr />
+	</ui:repeat>	
+</h:body>
 </html>
