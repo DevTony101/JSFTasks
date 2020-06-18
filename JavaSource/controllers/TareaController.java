@@ -3,6 +3,7 @@ package controllers;
 import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.logging.Logger;
@@ -23,8 +24,11 @@ public class TareaController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static Logger LOG = Logger.getLogger(TareaController.class);
 	
-	private UsuarioService uService = UsuarioService.getInstance();
-	private TareaService tService = TareaService.getInstance();
+	@Inject
+	private UsuarioService uService;
+	
+	@Inject
+	private TareaService tService;
 	private Tarea tarea = new Tarea();
 	
 	// Variable auxiliar para el nombre del usuario

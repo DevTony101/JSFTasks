@@ -4,24 +4,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
 import entities.Tarea;
 import entities.Usuario;
 import repositories.TareaRepository;
 
+@ApplicationScoped
 public class TareaService implements ITareaService {
 	
-	private final TareaRepository repo = new TareaRepository();
-	private final UsuarioService uService = UsuarioService.getInstance();
-	private static final TareaService INSTANCE = new TareaService();
+	@Inject
+	private UsuarioService uService;
 	
-	private TareaService() {
-		// El constructor es privado para evitar que los usuarios
-		// creen nuevas instancias
-	}
-	
-	public static TareaService getInstance() {
-		return INSTANCE;
-	}
+	@Inject
+	private TareaRepository repo;
 	
 	public void save(Tarea t, Usuario u) {
 		if (t != null && u != null) {

@@ -3,6 +3,7 @@ package controllers;
 import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.logging.Logger;
@@ -21,7 +22,8 @@ public class UsuarioController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static Logger LOG = Logger.getLogger(UsuarioController.class);
 	
-	private UsuarioService uService = UsuarioService.getInstance();
+	@Inject
+	private UsuarioService uService;
 	private Usuario usuario = new Usuario();
 	
 	public void guardarUsuario() {

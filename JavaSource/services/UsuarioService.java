@@ -4,22 +4,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
 import entities.Usuario;
 import repositories.UsuarioRepository;
 
+@ApplicationScoped
 public class UsuarioService implements IUsuarioService {
 	
-	private final UsuarioRepository repo = new UsuarioRepository();
-	private static final UsuarioService INSTANCE = new UsuarioService();
-	
-	private UsuarioService() {
-		// El constructor es privado para evitar que los usuarios
-		// creen nuevas instancias
-	}
-	
-	public static UsuarioService getInstance() {
-		return INSTANCE;
-	}
+	@Inject
+	private UsuarioRepository repo;
 	
 	public void save(Usuario obj) {
 		if (obj != null) {

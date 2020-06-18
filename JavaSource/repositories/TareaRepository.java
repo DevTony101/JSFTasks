@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -12,6 +14,7 @@ import org.jboss.logging.Logger;
 import entities.Tarea;
 import lombok.Cleanup;
 
+@ApplicationScoped
 public class TareaRepository implements DAORepository<Tarea> {
 
 	private static Logger LOG = Logger.getLogger(TareaRepository.class);
