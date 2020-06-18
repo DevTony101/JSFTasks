@@ -71,5 +71,12 @@
 			<version>1.18.12</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- BootsFaces -->
+		<dependency>
+			<groupId>net.bootsfaces</groupId>
+			<artifactId>bootsfaces</artifactId>
+			<version>1.4.2</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 </project>
