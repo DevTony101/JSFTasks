@@ -2,29 +2,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:b="http://bootsfaces.net/ui">
-	
-<h:head>
-<title>JSFTutorial</title>
-</h:head>
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-<h:body>
-	<ul>
-		<li><h:link value="Usuarios" outcome="usuarios" /></li>
-		<li><h:link value="Tareas" outcome="tareas" /></li>
-	</ul>
-	
-	<h:outputLabel value="Ingresa un nueva Tarea: " />
-	<br />
-	<h:form>
-		Titulo: <h:inputText id="itTitulo" value="#{tareaController.tarea.titulo}" />
+<ui:composition template="../templates/layout.xhtml">
+	<ui:define name="pageTitle">Tareas</ui:define>
+	<ui:define name="pageContent">
+		<b:button value="Crear Nueva Tarea" look="warning"
+			onclick="$('.modalPseudoClass').modal()" />
+		<b:modal id="mdTarea" title="Crear Tarea"
+			styleClass="modalPseudoClass">
+			<b:form>
+				<b:inputText id="itTitulo" label="Titulo" labelStyle="width:80px;"
+					value="#{tareaController.tarea.titulo}" />
+				<b:inputText id="itApellido" label="Usuario"
+					labelStyle="width:80px;" value="#{tareaController.usuario}" />
+				<b:inputTextarea id="itDescripcion" label="Descripcion"
+					value="#{tareaController.tarea.descripcion}" />
+				<b:commandButton value="Crear" look="primary" dismiss="modal"
+					action="#{tareaController.guardarTarea()}"
+					style="margin-left: auto; margin-top: 10px;" />
+			</b:form>
+			<f:facet name="footer">
+				<b:button value="Cancelar" dismiss="modal" />
+			</f:facet>
+		</b:modal>
 		<br />
-		Descripcion: <h:inputTextarea id="itApellido" value="#{tareaController.tarea.descripcion}" />
 		<br />
-		Nombre del Usuario: <h:inputText id="itUsuario" value="#{tareaController.usuario}" />
+		<h:outputLabel value="Tareas Guardadas" />
 		<br />
 		<br />
-		<h:commandButton id="btnEnviar" value="Crear Tarea" action="#{tareaController.guardarTarea()}" />
-	</h:form>
-</h:body>
+		<ui:repeat value="#{tareaController.TService.all}" var="tarea">
+			<b:panel>
+				<f:facet name="heading">
+					<h:outputText value="#{tarea.titulo}" />
+				</f:facet>
+				<h:outputText value="#{tarea.descripcion}" rendered="#{tarea.descripcion != null}" />
+				<h:outputText value="No hay descripción disponible" rendered="#{tarea.descripcion == null}" />
+				<br />
+				<br />
+				<b>Dueño: </b><h:outputText value="#{tarea.usuario.nombre}" />
+				<br />
+				<b>Fecha Limite: </b><h:outputText value="#{tarea.fechaFinal}" />
+			</b:panel>
+		</ui:repeat>
+	</ui:define>
+</ui:composition>
 </html>

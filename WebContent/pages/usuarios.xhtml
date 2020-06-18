@@ -2,46 +2,58 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:b="http://bootsfaces.net/ui">
-<h:head>
-	<title>JSFTutorial</title>
-</h:head>
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-<h:body>
-	<ul>
-		<li><h:link value="Usuarios" outcome="usuarios" /></li>
-		<li><h:link value="Tareas" outcome="tareas" /></li>
-	</ul>
-
-	<h:outputLabel value="Ingresa un nuevo Usuario: " />
-	<br />
-	<h:form>
-		Nombre: <h:inputText id="itNombre" value="#{usuarioController.usuario.nombre}" />
+<ui:composition template="../templates/layout.xhtml">
+	<ui:define name="pageTitle">Usuarios</ui:define>
+	<ui:define name="pageContent">
+		<b:button value="Crear Nuevo Usuario" look="success"
+			onclick="$('.modalPseudoClass').modal()" />
+		<b:modal id="mdUsuario" title="Crear Usuario"
+			styleClass="modalPseudoClass">
+			<b:form inline="true">
+				<h:panelGrid columns="2" cellpadding="5">
+					<b:inputText id="itNombre" label="Nombres: "
+						labelStyle="width:80px;"
+						value="#{usuarioController.usuario.nombre}" />
+					<b:inputText id="itApellido" label="Apellidos: "
+						labelStyle="width:80px;"
+						value="#{usuarioController.usuario.apellido}" />
+					<b:inputText id="itUsername" label="Usuario: "
+						labelStyle="margin-top: 20px; width:80px;"
+						value="#{usuarioController.usuario.nombreUsuario}" />
+					<b:inputText id="itStatus" label="Status: "
+						labelStyle="margin-top: 20px; width:80px;"
+						value="#{usuarioController.usuario.status}" />
+				</h:panelGrid>
+				<b:commandButton value="Crear" look="primary" dismiss="modal"
+					action="#{usuarioController.guardarUsuario()}"
+					style="margin-left: auto; margin-top: 10px;" />
+			</b:form>
+			<f:facet name="footer">
+				<b:button value="Cancelar" dismiss="modal" />
+			</f:facet>
+		</b:modal>
 		<br />
-		Apellido: <h:inputText id="itApellido" value="#{usuarioController.usuario.apellido}" />
 		<br />
-		Status: <h:inputText id="itStatus" value="#{usuarioController.usuario.status}" />
+		<h:outputLabel value="Usuarios Registrados" />
 		<br />
-		Nombre de Usuario: <h:inputText id="itUsername" value="#{usuarioController.usuario.nombreUsuario}" />
-		<br />
-		<br />
-		<h:commandButton id="btnEnviar" value="Crear Usuario" action="#{usuarioController.guardarUsuario()}" />
-	</h:form>
-	<br />
-	<br />
-	<h:outputLabel value="Usuarios Registrados:" />
-	<ui:repeat var="usuario" value="#{usuarioController.UService.all}" varStatus="status">
-		<hr />
-		<h:outputText value="Usuario numero #{status.index + 1}"></h:outputText>
-		<br />
-		Nombre: <h:outputText value="#{usuario.nombre}"></h:outputText>
-		<br />
-		Apellido: <h:outputText value="#{usuario.apellido}"></h:outputText>
-		<br />
-		Nombre de Usuario: <h:outputText value="#{usuario.nombreUsuario}"></h:outputText>
-		<br />
-		Fecha de Creación: <h:outputText value="#{usuario.fechaCreacion}"></h:outputText>
-		<hr />
-	</ui:repeat>	
-</h:body>
+		<b:dataTable var="usuario" value="#{usuarioController.UService.all}"
+			paginated="false">
+			<f:facet name="header">
+				<tr>
+					<th>Nombre</th>
+					<th>Apellidos</th>
+					<th>Nombre de Usuario</th>
+					<th>Fecha de Creacion</th>
+				</tr>
+			</f:facet>
+			<b:dataTableColumn value="#{usuario.nombre}" />
+			<b:dataTableColumn value="#{usuario.apellido}" />
+			<b:dataTableColumn value="#{usuario.nombreUsuario}" />
+			<b:dataTableColumn value="#{usuario.fechaCreacion}" />
+		</b:dataTable>
+	</ui:define>
+</ui:composition>
 </html>
